@@ -23,7 +23,7 @@ https://github.com/monospacesoftware/pyimagesort/releases
 ### Requirements
 
 * Python 3.6+
-* [exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/)
+* [exiftool](https://exiftool.org/)
 
 ### Installation
 
