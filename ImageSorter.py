@@ -158,14 +158,16 @@ class ImageSorter:
         self.sort_to(self.recycle_dir, image, False)
 
     def sort_to(self, root_dir: Path, incoming_image: ImageInfo, check_rotated: bool):
-        ext = incoming_image.path.name[-4:].lower()
+        #ext = incoming_image.path.name[-4:].lower()
+        file_name = incoming_image.path.name
+        ext = file_name[file_name.rindex("."):]
         year = incoming_image.ts.strftime("%Y")
         month = incoming_image.ts.strftime("%m")
         new_name = incoming_image.ts.strftime(f"%Y%m%d-%H%M%S-0{ext}")
         new_path = Path(os.path.join(root_dir, year, month, new_name))
         new_path.parent.mkdir(parents=True, exist_ok=True)
         if new_path.exists():
-            if check_rotated and ImageLoader.image_re.match(incoming_image.path.name):
+            if check_rotated and ImageLoader.image_re.match(file_name):
                 self.logger.info(f"{new_path} already exists! Checking for rotated images...")
                 existing_image = self.find_rotated(incoming_image)
                 if existing_image:
